@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Web Developer & Product Builder</title>
+  <script>
+    (function () {
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem("portfolio-theme");
+      } catch (error) {
+        savedTheme = null;
+      }
+      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.theme = savedTheme || (prefersLight ? "light" : "dark");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+  <script>
+    tailwind = {
+      config: {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Space Grotesk", "sans-serif"]
+          },
+          colors: {
+            ink: "#09090b",
+            panel: "#121214",
+            line: "#24242a",
+            soft: "#a1a1aa",
+            electric: "#8b5cf6",
+            cyanpop: "#06b6d4",
+            coral: "#fb7185",
+            mint: "#34d399"
+          },
+          boxShadow: {
+            glow: "0 0 36px rgba(139, 92, 246, 0.32)",
+            card: "0 28px 80px rgba(0, 0, 0, 0.34)"
+          },
+          animation: {
+            "grid-drift": "gridDrift 22s linear infinite",
+            "float-slow": "floatSlow 7s ease-in-out infinite",
+            "float-fast": "floatFast 5s ease-in-out infinite",
+            "pulse-line": "pulseLine 2s ease-in-out infinite",
+            "marquee": "marquee 18s linear infinite",
+            "shine": "shine 4s linear infinite"
+          },
+          keyframes: {
+            gridDrift: {
+              "0%": { backgroundPosition: "0 0" },
+              "100%": { backgroundPosition: "56px 56px" }
+            },
+            floatSlow: {
+              "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+              "50%": { transform: "translateY(-18px) rotate(2deg)" }
+            },
+            floatFast: {
+              "0%, 100%": { transform: "translate3d(0, 0, 0)" },
+              "50%": { transform: "translate3d(10px, -14px, 0)" }
+            },
+            pulseLine: {
+              "0%, 100%": { opacity: ".35", transform: "scaleY(1)" },
+              "50%": { opacity: "1", transform: "scaleY(1.3)" }
+            },
+            marquee: {
+              "0%": { transform: "translateX(0)" },
+              "100%": { transform: "translateX(-50%)" }
+            },
+            shine: {
+              "0%": { transform: "translateX(-120%)" },
+              "100%": { transform: "translateX(120%)" }
+            }
+          }
+        }
+      }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./fallback.css">
+  <noscript><style>#pageLoader{display:none}</style></noscript> 
+</head>
+<body class="min-h-screen overflow-x-hidden bg-ink font-body text-zinc-100 antialiased selection:bg-electric/30">
+  <div id="pageLoader" class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shell">
+      <img src="assets/images/coolcreates_2.png" alt="" class="loader-logo">
+    </div>
+  </div>
+
+  <nav id="navbar" class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-ink/75 px-5 py-4 backdrop-blur-2xl transition-all duration-300 md:px-8">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <a href="#hero" class="flex h-18 items-center"><img src="assets/images/coolcreates.png" data-dark-src="assets/images/coolcreates.png" data-light-src="assets/images/coolcreates-light.png" alt="Cool Creates logo" class="theme-logo h-18 w-auto object-contain"></a>
+      <ul id="navLinks" class="hidden items-center gap-8 md:flex">
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#services">Services</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20.25 14.15A7.5 7.5 0 0 1 9.85 3.75a8.25 8.25 0 1 0 10.4 10.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <a href="#contact" class="hidden rounded-md bg-electric px-5 py-2.5 font-display text-sm font-bold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-violet-500 md:inline-flex">Hire Me</a>
+      </div>
+      <button id="navToggle" class="flex h-11 w-11 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] transition duration-300 hover:border-electric/40 hover:bg-electric/10 md:hidden" aria-label="Open menu" aria-expanded="false">
+        <span class="hamburger" aria-hidden="true">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero" class="relative flex min-h-screen items-center overflow-hidden px-5 pb-20 pt-32 text-center">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.07)_1px,transparent_1px)] bg-[length:56px_56px] opacity-70 [mask-image:radial-gradient(ellipse_80%_72%_at_50%_45%,black_25%,transparent_100%)] motion-safe:animate-grid-drift"></div>
+      <div class="absolute left-[7%] top-28 h-24 w-24 rounded-full border border-electric/30 bg-electric/10 motion-safe:animate-float-slow"></div>
+      <div class="absolute bottom-28 right-[12%] h-28 w-28 rounded-lg border border-cyanpop/30 bg-cyanpop/10 motion-safe:animate-float-fast"></div>
+      <div class="absolute right-[18%] top-[24%] h-10 w-10 rotate-45 rounded-sm border border-coral/30 bg-coral/10 motion-safe:animate-float-slow"></div>
+      <div class="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-electric/25 to-transparent"></div>
+
+      <div class="relative z-10 mx-auto max-w-5xl">
+        <div class="reveal inline-flex items-center gap-2 rounded-full border border-electric/30 bg-electric/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-violet-200">
+          <span class="h-2 w-2 rounded-full bg-mint shadow-[0_0_14px_rgba(52,211,153,0.9)]"></span>
+          Available for Projects
+        </div>
+        <h1 class="reveal mt-7 font-display text-5xl font-extrabold leading-[1.03] tracking-tight text-white delay-100 sm:text-6xl lg:text-7xl">
+          I Build Digital Products That <span class="bg-gradient-to-r from-violet-300 via-cyan-200 to-rose-300 bg-clip-text text-transparent">Solve Real Problems</span>
+        </h1>
+        <p class="reveal mx-auto mt-6 max-w-2xl text-base font-light leading-8 text-soft delay-200 sm:text-lg">
+          Web Developer - Product Builder - Startup MVP Creator
+        </p>
+        <div class="reveal mt-10 flex flex-col justify-center gap-3 delay-300 sm:flex-row">
+          <a href="#projects" class="rounded-md bg-electric px-7 py-3.5 font-display text-sm font-bold text-white shadow-glow transition duration-300 hover:-translate-y-1 hover:bg-violet-500">View Projects</a>
+          <a href="#contact" class="rounded-md border border-white/10 bg-white/[0.03] px-7 py-3.5 font-display text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:border-electric/50 hover:bg-electric/10">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-soft sm:flex">
+        <span>Scroll</span>
+        <span class="h-10 w-px origin-top bg-gradient-to-b from-transparent via-electric to-transparent motion-safe:animate-pulse-line"></span>
+      </div>
+    </section>
+
+    <section class="overflow-hidden border-y border-white/5 bg-white/[0.025] py-4">
+      <div class="flex w-max gap-10 whitespace-nowrap text-sm font-bold uppercase tracking-[0.22em] text-zinc-500 motion-safe:animate-marquee">
+        <span>Flask</span><span>React</span><span>Tailwind CSS</span><span>PostgreSQL</span><span>REST APIs</span><span>Auth Systems</span><span>Deployment</span>
+        <span>Flask</span><span>React</span><span>Tailwind CSS</span><span>PostgreSQL</span><span>REST APIs</span><span>Auth Systems</span><span>Deployment</span>
+      </div>
+    </section>
+
+    <section id="about" class="px-5 py-24 md:py-32">
+      <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="reveal">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">From Ideas to Shipped Products</h2>
+          <p class="mt-6 border-l-2 border-electric pl-5 font-display text-xl font-bold leading-8 text-white">"I don't just write code. I architect products that users actually want to use."</p>
+          <div class="mt-7 space-y-5 text-base leading-8 text-soft">
+            <p>I'm a web developer focused on turning business ideas into real, working digital products. My work sits at the intersection of engineering and product thinking.</p>
+            <p>Whether it's a SaaS MVP that needs to go live fast, a marketplace platform, or a data-driven web application, I bring full-stack depth and a startup-level sense of urgency to every build.</p>
+            <p>I've built <strong class="font-semibold text-white">platforms across fitness, beauty, social media, and agribusiness</strong>, each one engineered to solve a specific real-world problem.</p>
+          </div>
+        </div>
+        <div class="reveal delay-200 rounded-lg border border-white/10 bg-panel/80 p-6 shadow-card">
+          <div class="mb-5 flex items-center justify-between">
+            <p class="font-display text-lg font-bold text-white">Tech Stack</p>
+            <span class="rounded-full border border-mint/20 bg-mint/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-mint">Active</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Flask</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">React</span>
+            <span class="skill-pill">HTML5</span>
+            <span class="skill-pill">Tailwind CSS</span>
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">REST APIs</span>
+            <span class="skill-pill">SQLAlchemy</span>
+            <span class="skill-pill">Git & GitHub</span>
+            <span class="skill-pill">Auth Systems</span>
+            <span class="skill-pill">Deployment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="bg-zinc-950 px-5 py-24 md:py-32">
+      <div class="mx-auto max-w-7xl">
+        <span class="section-tag reveal">Projects</span>
+        <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <h2 class="section-title reveal">Things I've Shipped</h2>
+          </div>
+          <a href="#contact" class="reveal w-fit rounded-md border border-white/10 px-5 py-3 font-display text-sm font-bold text-white transition hover:border-electric/50 hover:bg-electric/10">Start a Build</a>
+        </div>
+
+        <div class="project-carousel reveal" aria-label="Things I've shipped carousel">
+          <div class="project-carousel-top">
+            <p class="project-carousel-count"><span id="projectCarouselCurrent">01</span> / <span id="projectCarouselTotal">05</span></p>
+            <div class="project-carousel-controls">
+              <button class="project-carousel-btn" type="button" data-project-carousel-prev aria-label="Previous project">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18 9 12l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="project-carousel-btn" type="button" data-project-carousel-next aria-label="Next project">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-carousel-viewport">
+            <div class="project-carousel-track" id="projectCarouselTrack">
+              <article class="project-card project-slide">
+                <div class="project-shot">
+                  <img src="./assets/images/coolgym.jpg" alt="CoolGym website screenshot" class="project-img">
+                </div>
+                <div class="p-6">
+                  <p class="project-kicker">01 - Fitness Platform</p>
+                  <h3 class="project-title">CoolGym</h3>
+                  <p class="project-copy">A full-featured fitness platform connecting gym-goers with trainers, workout plans, and progress tracking tools.</p>
+                  <div class="project-problem"><strong>Problem Solved</strong> Unifies trainer discovery, scheduling, and workout logging into one seamless experience.</div>
+                  <div class="project-stack">
+                    <span>HTML5</span><span>Python</span><span>Flask</span><span>PostgreSQL</span><span>JavaScript</span><span>Tailwind</span><span>Auth</span><span>Deployment</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="https://coolgym.onrender.com/" class="project-link-primary">Live Demo</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project-card project-slide">
+                <div class="project-shot">
+                  <img src="./assets/images/bookglam.jpg" alt="BookGlam website screenshot" class="project-img">
+                </div>
+                <div class="p-6">
+                  <p class="project-kicker">02 - Marketplace MVP</p>
+                  <h3 class="project-title">BookGlam</h3>
+                  <p class="project-copy">A beauty service marketplace MVP that lets clients discover, review, and book local beauty professionals in real time.</p>
+                  <div class="project-problem"><strong>Problem Solved</strong> Gives beauty professionals a dedicated platform for profiles, bookings, and client reviews.</div>
+                  <div class="project-stack">
+                    <span>HTML5</span><span>Python</span><span>Tailwind CSS</span><span>JavaScript</span><span>Flask</span><span>PostgreSQL</span><span>Auth</span><span>Deployment</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="https://bookglam.onrender.com/" class="project-link-primary">Live Demo</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project-card project-slide">
+                <div class="project-shot">
+                  <img src="./assets/images/ima.png" alt="Ima's Aesthetics website screenshot" class="project-img">
+                </div>
+                <div class="p-6">
+                  <p class="project-kicker">03 - Lash And Nail Website</p>
+                  <h3 class="project-title">Ima's Aesthetics</h3>
+                  <p class="project-copy">Where beauty meets artistry. Indulge in precision-crafted lash extensions and couture nail services designed for the woman who deserves only the finest.</p>
+                  <div class="project-problem"><strong>Problem Solved</strong> Provides authentic service experiences for beauty enthusiasts.</div>
+                  <div class="project-stack">
+                    <span>HTML5</span><span>JavaScript</span><span>Tailwind CSS</span><span>Deployment</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="https://imasaesthetics.netlify.app/" class="project-link-primary">Live Demo</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project-card project-slide">
+                <div class="project-shot">
+                  <img src="./assets/images/gracelawn.jpg" alt="Gracelawn Enterprise website screenshot" class="project-img">
+                </div>
+                <div class="p-6">
+                  <p class="project-kicker">04 - Agri-Tech Platform</p>
+                  <h3 class="project-title">Gracelawn Enterprise</h3>
+                  <p class="project-copy">A farm management platform for tracking livestock inventory, feeding schedules, health records, and sales.</p>
+                  <div class="project-problem"><strong>Problem Solved</strong> Digitalizes Pig farm operations from pen management to profitability reporting.</div>
+                  <div class="project-stack">
+                    <span>HTML5</span><span>Flask</span><span>PostgreSQL</span><span>Python</span><span>Tailwind CSS</span><span>Dashboard UI</span><span>Reports</span><span>JavaScript</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="https://www.gracelawnenterprise.com.ng/" class="project-link-primary">Live Demo</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project-card project-slide">
+                <div class="project-shot">
+                  <img src="./assets/images/tashasnacks.png" alt="Tasha's Snacks website screenshot" class="project-img">
+                </div>
+                <div class="p-6">
+                  <p class="project-kicker">05 - Homemade Food & Snacks Platform</p>
+                  <h3 class="project-title">Tasha's Snacks</h3>
+                  <p class="project-copy">A platform for selling homemade snacks and food items directly to customers.</p>
+                  <div class="project-problem"><strong>Problem Solved</strong> Connects local artisans with customers looking for unique, homemade products.</div>
+                  <div class="project-stack">
+                    <span>HTML5</span><span>Tailwind CSS</span><span>JavaScript</span><span>Deployment</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="https://tashasnacks.netlify.app/" class="project-link-primary">Live Demo</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="project-carousel-dots" aria-label="Choose project"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="px-5 py-24 md:py-32">
+      <div class="mx-auto max-w-7xl">
+        <span class="section-tag reveal">Services</span>
+        <h2 class="section-title reveal">What I Build</h2>
+        <p class="reveal mt-4 max-w-2xl text-soft">End-to-end product development, from the first line of code to a live, deployed product.</p>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <div class="service-card reveal"><div class="service-icon">01</div><h3>Web Applications</h3><p>Full-stack web apps with clean architecture, fast load times, and intuitive user experience.</p></div>
+          <div class="service-card reveal delay-100"><div class="service-icon">02</div><h3>SaaS MVP Development</h3><p>Lean, scalable MVPs built to validate your product with real users.</p></div>
+          <div class="service-card reveal delay-200"><div class="service-icon">03</div><h3>Startup Prototypes</h3><p>Fast, functional prototypes that are presentation-ready from day one.</p></div>
+          <div class="service-card reveal delay-300"><div class="service-icon">04</div><h3>API Development</h3><p>RESTful APIs designed for performance, security, and clean integrations.</p></div>
+          <div class="service-card reveal delay-[400ms]"><div class="service-icon">05</div><h3>UI/UX-First Systems</h3><p>Beautiful, accessible interfaces backed by solid engineering.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="border-y border-white/5 bg-white/[0.025] px-5 py-24 md:py-32">
+      <div class="mx-auto max-w-7xl">
+        <span class="section-tag reveal">Process</span>
+        <h2 class="section-title reveal">How I Work</h2>
+        <div class="mt-12 grid gap-4 md:grid-cols-5">
+          <div class="step-card reveal"><span>01</span><h3>Idea Discovery</h3><p>Understand the problem, user, and market.</p></div>
+          <div class="step-card reveal delay-100"><span>02</span><h3>System Design</h3><p>Plan architecture, data, and scope.</p></div>
+          <div class="step-card reveal delay-200"><span>03</span><h3>Development</h3><p>Build iteratively with clean code.</p></div>
+          <div class="step-card reveal delay-300"><span>04</span><h3>Testing & QA</h3><p>Polish, test, and tune performance.</p></div>
+          <div class="step-card reveal delay-[400ms]"><span>05</span><h3>Deployment</h3><p>Launch with configuration and support.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" class="px-5 py-24">
+      <div class="reveal mx-auto grid max-w-7xl overflow-hidden rounded-lg border border-white/10 bg-line md:grid-cols-3 md:gap-px">
+        <div class="stat-card"><span class="stat-num" data-target="4" data-suffix="+">0</span><p>Projects Built</p></div>
+        <div class="stat-card"><span class="stat-num" data-target="8" data-suffix="+">0</span><p>MVPs Shipped</p></div>
+        <div class="stat-card"><span class="stat-num" data-target="10" data-suffix="+">0</span><p>Technologies Used</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="px-5 py-24 md:py-32">
+      <div class="section-inner">
+        <div class="contact-grid">
+          <div class="reveal">
+            <span class="section-tag">Contact</span>
+            <h2 class="contact-h2">Let's Build<br>Something <span class="grad">Real</span></h2>
+            <p class="contact-sub">Have a project, an idea, or just want to talk product? I'm open to serious work.</p>
+
+            <div class="contact-links">
+              <a href="mailto:coolguyolakunle10@gmail.com" class="contact-link">
+                <span class="link-icon">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+                </span>
+                <span>
+                  <span class="link-label">Email</span>
+                  coolguyolakunle10@gmail.com
+                </span>
+                <span class="link-arrow">&rarr;</span>
+              </a>
+              <a href="https://wa.me/8163680215" class="contact-link" target="_blank" rel="noopener">
+                <span class="link-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L.057 23.996l6.306-1.648A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.007-1.371l-.36-.213-3.722.974.994-3.623-.233-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                </span>
+                <span>
+                  <span class="link-label">WhatsApp</span>
+                  Message me directly
+                </span>
+                <span class="link-arrow">&rarr;</span>
+              </a>
+              <a href="https://linkedin.com/in/coolguyolakunle" class="contact-link" target="_blank" rel="noopener">
+                <span class="link-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </span>
+                <span>
+                  <span class="link-label">LinkedIn</span>
+                  View my profile
+                </span>
+                <span class="link-arrow">&rarr;</span>
+              </a>
+              <a href="https://github.com/coolguyolakunle" class="contact-link" target="_blank" rel="noopener">
+                <span class="link-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </span>
+                <span>
+                  <span class="link-label">GitHub</span>
+                  See my code
+                </span>
+                <span class="link-arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal delay-200">
+            <form id="contactForm" action="https://formspree.io/f/mzdolzly" method="POST" class="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="formName">Name</label>
+                <input type="text" class="form-input" placeholder="Your full name" id="formName" name="name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="formEmail">Email</label>
+                <input type="email" class="form-input" placeholder="your@email.com" id="formEmail" name="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="formMsg">Project Brief</label>
+                <textarea class="form-textarea" placeholder="Describe what you're building..." id="formMsg" name="message" required></textarea>
+              </div>
+              <button class="btn-primary btn-submit" id="submitBtn" type="submit">
+                <span id="btnText">Send Message</span>
+                <svg id="btnArrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto flex max-w-7xl flex-col gap-3 border-t border-white/10 px-5 py-8 text-sm text-soft sm:flex-row sm:items-center sm:justify-between">
+    <a href="#hero" class="footer-logo"><img src="assets/images/coolcreates.png" data-dark-src="assets/images/coolcreates.png" data-light-src="assets/images/coolcreates-light.png" alt="Cool Creates logo" class="theme-logo"></a>
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+      <span>Developing with precision.</span>
+      <a href="./privacy-policy.html" class="transition hover:text-white">Privacy Policy</a>
+    </div>
+    <span>&copy; 2026</span>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
