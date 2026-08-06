@@ -206,150 +206,169 @@
           <a href="#contact" class="reveal w-fit rounded-md border border-white/10 px-5 py-3 font-display text-sm font-bold text-white transition hover:border-electric/50 hover:bg-electric/10">Start a Build</a>
         </div>
 
-        <div class="project-carousel reveal" aria-label="Things I've shipped carousel">
-          <div class="project-carousel-top">
-            <p class="project-carousel-count"><span id="projectCarouselCurrent">01</span> / <span id="projectCarouselTotal">05</span></p>
-            <div class="project-carousel-controls">
-              <button class="project-carousel-btn" type="button" data-project-carousel-prev aria-label="Previous project">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18 9 12l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <button class="project-carousel-btn" type="button" data-project-carousel-next aria-label="Next project">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+        <div class="project-bento reveal" aria-label="Things I've shipped">
+          <article class="project-card bento-card bento-1">
+            <div class="bento-media">
+              <img src="./assets/images/coolgym.jpg" alt="CoolGym website screenshot" class="project-img">
             </div>
-          </div>
-
-          <div class="project-carousel-viewport">
-            <div class="project-carousel-track" id="projectCarouselTrack">
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/coolgym.jpg" alt="CoolGym website screenshot" class="project-img">
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">01 — Fitness Platform</p>
+                <h3 class="project-title">CoolGym</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A full-featured fitness platform connecting gym-goers with trainers, workout plans, and progress tracking tools.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Unifies trainer discovery, scheduling, and workout logging into one seamless experience.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>Python</span><span>Flask</span><span>PostgreSQL</span><span>JavaScript</span><span>Tailwind</span><span>Auth</span><span>Deployment</span>
                 </div>
-                <div class="p-6">
-                  <p class="project-kicker">01 - Fitness Platform</p>
-                  <h3 class="project-title">CoolGym</h3>
-                  <p class="project-copy">A full-featured fitness platform connecting gym-goers with trainers, workout plans, and progress tracking tools.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Unifies trainer discovery, scheduling, and workout logging into one seamless experience.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>Python</span><span>Flask</span><span>PostgreSQL</span><span>JavaScript</span><span>Tailwind</span><span>Auth</span><span>Deployment</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://coolgym.onrender.com/" class="project-link-primary">Live Demo</a>
-                  </div>
+                <div class="project-actions">
+                  <a href="https://coolgym.onrender.com/" class="project-link-primary">Live Demo</a>
                 </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/bookglam.jpg" alt="BookGlam website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">02 - Marketplace MVP</p>
-                  <h3 class="project-title">BookGlam</h3>
-                  <p class="project-copy">A beauty service marketplace MVP that lets clients discover, review, and book local beauty professionals in real time.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Gives beauty professionals a dedicated platform for profiles, bookings, and client reviews.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>Python</span><span>Tailwind CSS</span><span>JavaScript</span><span>Flask</span><span>PostgreSQL</span><span>Auth</span><span>Deployment</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://bookglam.onrender.com/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/sunset hotel.png" alt="Sunset Hotel website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">03 - Marketplace MVP</p>
-                  <h3 class="project-title">Sunset Hotel And Suites</h3>
-                  <p class="project-copy">A luxury hotel booking platform that offers seamless reservation experiences and exclusive amenities for discerning travelers.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Gives travelers a streamlined way to discover and book luxury accommodations.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>Python</span><span>Tailwind CSS</span><span>JavaScript</span><span>Flask</span><span>PostgreSQL</span><span>Auth</span><span>Deployment</span><span>Dashboard UI</span><span>Reports</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://sunsethotelandsuites.netlify.app/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/ima.png" alt="Ima's Aesthetics website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">04 - Lash And Nail Website</p>
-                  <h3 class="project-title">Ima's Aesthetics</h3>
-                  <p class="project-copy">Where beauty meets artistry. Indulge in precision-crafted lash extensions and couture nail services designed for the woman who deserves only the finest.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Provides authentic service experiences for beauty enthusiasts.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>JavaScript</span><span>Tailwind CSS</span><span>Deployment</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://imasaesthetics.netlify.app/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/gracelawn.jpg" alt="Gracelawn Enterprise website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">05 - Agri-Tech Platform</p>
-                  <h3 class="project-title">Gracelawn Enterprise</h3>
-                  <p class="project-copy">A farm management platform for tracking livestock inventory, feeding schedules, health records, and sales.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Digitalizes Pig farm operations from pen management to profitability reporting.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>Flask</span><span>PostgreSQL</span><span>Python</span><span>Tailwind CSS</span><span>Dashboard UI</span><span>Reports</span><span>JavaScript</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://www.gracelawnenterprise.com.ng/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/tashasnacks.png" alt="Tasha's Snacks website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">06 - Homemade Food & Snacks Platform</p>
-                  <h3 class="project-title">Tasha's Snacks</h3>
-                  <p class="project-copy">A platform for selling homemade snacks and food items directly to customers.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Connects local artisans with customers looking for unique, homemade products.</div>
-                  <div class="project-stack">
-                    <span>HTML5</span><span>Tailwind CSS</span><span>JavaScript</span><span>Deployment</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://tashasnacks.netlify.app/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="project-card project-slide">
-                <div class="project-shot">
-                  <img src="./assets/images/dfancy.png" alt="D'Fancys website screenshot" class="project-img">
-                </div>
-                <div class="p-6">
-                  <p class="project-kicker">07 - Redefining Handmade Shoes. </p>
-                  <h3 class="project-title">D'Fancys</h3>
-                  <p class="project-copy">A platform for selling handmade shoes and accessories directly to customers.</p>
-                  <div class="project-problem"><strong>Problem Solved</strong> Redefines the way handmade shoes are marketed and sold to a global audience.</div>
-                  <div class="project-stack">
-                    <span>React</span><span>Tailwind CSS</span><span>Deployment</span>
-                  </div>
-                  <div class="project-actions">
-                    <a href="https://dfancys.netlify.app/" class="project-link-primary">Live Demo</a>
-                  </div>
-                </div>
-              </article>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-carousel-dots" aria-label="Choose project"></div>
+          <article class="project-card bento-card bento-2">
+            <div class="bento-media">
+              <img src="./assets/images/bookglam.jpg" alt="BookGlam website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">02 — Marketplace MVP</p>
+                <h3 class="project-title">BookGlam</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A beauty service marketplace MVP that lets clients discover, review, and book local beauty professionals in real time.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Gives beauty professionals a dedicated platform for profiles, bookings, and client reviews.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>Python</span><span>Tailwind CSS</span><span>JavaScript</span><span>Flask</span><span>PostgreSQL</span><span>Auth</span><span>Deployment</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://bookglam.onrender.com/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bento-card bento-3">
+            <div class="bento-media">
+              <img src="./assets/images/sunset hotel.png" alt="Sunset Hotel website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">03 — Marketplace MVP</p>
+                <h3 class="project-title">Sunset Hotel And Suites</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A luxury hotel booking platform that offers seamless reservation experiences and exclusive amenities for discerning travelers.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Gives travelers a streamlined way to discover and book luxury accommodations.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>Python</span><span>Tailwind CSS</span><span>JavaScript</span><span>Flask</span><span>PostgreSQL</span><span>Auth</span><span>Deployment</span><span>Dashboard UI</span><span>Reports</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://sunsethotelandsuites.netlify.app/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bento-card bento-4">
+            <div class="bento-media">
+              <img src="./assets/images/ima.png" alt="Ima's Aesthetics website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">04 — Lash & Nail Studio</p>
+                <h3 class="project-title">Ima's Aesthetics</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">Where beauty meets artistry. Indulge in precision-crafted lash extensions and couture nail services designed for the woman who deserves only the finest.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Provides authentic service experiences for beauty enthusiasts.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>JavaScript</span><span>Tailwind CSS</span><span>Deployment</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://imasaesthetics.netlify.app/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bento-card bento-5">
+            <div class="bento-media">
+              <img src="./assets/images/gracelawn.jpg" alt="Gracelawn Enterprise website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">05 — Agri-Tech Platform</p>
+                <h3 class="project-title">Gracelawn Enterprise</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A farm management platform for tracking livestock inventory, feeding schedules, health records, and sales.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Digitalizes pig farm operations from pen management to profitability reporting.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>Flask</span><span>PostgreSQL</span><span>Python</span><span>Tailwind CSS</span><span>Dashboard UI</span><span>Reports</span><span>JavaScript</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://www.gracelawnenterprise.com.ng/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bento-card bento-6">
+            <div class="bento-media">
+              <img src="./assets/images/tashasnacks.png" alt="Tasha's Snacks website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">06 — Homemade Snacks</p>
+                <h3 class="project-title">Tasha's Snacks</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A platform for selling homemade snacks and food items directly to customers.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Connects local artisans with customers looking for unique, homemade products.</div>
+                <div class="project-stack">
+                  <span>HTML5</span><span>Tailwind CSS</span><span>JavaScript</span><span>Deployment</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://tashasnacks.netlify.app/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bento-card bento-7">
+            <div class="bento-media">
+              <img src="./assets/images/dfancy.png" alt="D'Fancys website screenshot" class="project-img">
+            </div>
+            <div class="bento-overlay">
+              <div class="bento-summary">
+                <p class="project-kicker">07 — Handmade Footwear</p>
+                <h3 class="project-title">D'Fancys</h3>
+              </div>
+              <div class="bento-details">
+                <p class="project-copy">A platform for selling handmade shoes and accessories directly to customers.</p>
+                <div class="project-problem"><strong>Problem Solved</strong> Redefines the way handmade shoes are marketed and sold to a global audience.</div>
+                <div class="project-stack">
+                  <span>React</span><span>Tailwind CSS</span><span>Deployment</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://dfancys.netlify.app/" class="project-link-primary">Live Demo</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="bento-swipe-hint">
+          Swipe to explore
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <div class="bento-progress" aria-hidden="true">
+          <p class="bento-counter"><span id="bentoCurrent">01</span> / <span id="bentoTotal">07</span></p>
+          <div class="bento-dots" id="bentoDots"></div>
         </div>
       </div>
     </section>

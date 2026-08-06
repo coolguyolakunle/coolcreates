@@ -506,146 +506,6 @@ document.querySelectorAll("[data-target]").forEach((counter) => {
   counterObserver.observe(counter);
 });
 
-const projectCarouselTrack = document.getElementById("projectCarouselTrack");
-const projectSlides = projectCarouselTrack ? Array.from(projectCarouselTrack.querySelectorAll(".project-slide")) : [];
-const projectCarouselPrev = document.querySelector("[data-project-carousel-prev]");
-const projectCarouselNext = document.querySelector("[data-project-carousel-next]");
-const projectCarouselDots = document.querySelector(".project-carousel-dots");
-const projectCarouselCurrent = document.getElementById("projectCarouselCurrent");
-const projectCarouselTotal = document.getElementById("projectCarouselTotal");
-let activeProjectSlide = 0;
-let projectSwipeStartX = 0;
-let projectSwipeStartY = 0;
-let projectSwipeDeltaX = 0;
-let projectSwipePointerId = null;
-let isProjectSwipeDragging = false;
-
-function formatProjectNumber(number) {
-  return String(number).padStart(2, "0");
-}
-
-function updateProjectCarousel() {
-  if (!projectCarouselTrack || !projectSlides.length) return;
-
-  projectCarouselTrack.style.transform = `translateX(-${activeProjectSlide * 100}%)`;
-
-  projectSlides.forEach((slide, index) => {
-    const isActive = index === activeProjectSlide;
-    slide.setAttribute("aria-hidden", String(!isActive));
-    slide.tabIndex = isActive ? 0 : -1;
-    slide.querySelectorAll("a, button").forEach((control) => {
-      control.tabIndex = isActive ? 0 : -1;
-    });
-  });
-
-  projectCarouselDots?.querySelectorAll(".project-carousel-dot").forEach((dot, index) => {
-    dot.classList.toggle("is-active", index === activeProjectSlide);
-    dot.setAttribute("aria-current", index === activeProjectSlide ? "true" : "false");
-  });
-
-  if (projectCarouselCurrent) {
-    projectCarouselCurrent.textContent = formatProjectNumber(activeProjectSlide + 1);
-  }
-}
-
-function goToProjectSlide(index) {
-  if (!projectSlides.length) return;
-  activeProjectSlide = (index + projectSlides.length) % projectSlides.length;
-  updateProjectCarousel();
-}
-
-function setProjectCarouselDragging(isDragging) {
-  if (!projectCarouselTrack) return;
-  projectCarouselTrack.classList.toggle("is-dragging", isDragging);
-}
-
-function resetProjectCarouselSwipe() {
-  projectSwipePointerId = null;
-  projectSwipeDeltaX = 0;
-  isProjectSwipeDragging = false;
-  setProjectCarouselDragging(false);
-}
-
-function cancelProjectCarouselSwipe() {
-  resetProjectCarouselSwipe();
-  updateProjectCarousel();
-}
-
-if (projectSlides.length) {
-  if (projectCarouselTotal) {
-    projectCarouselTotal.textContent = formatProjectNumber(projectSlides.length);
-  }
-
-  projectSlides.forEach((slide, index) => {
-    const dot = document.createElement("button");
-    dot.className = "project-carousel-dot";
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Show project ${index + 1}`);
-    dot.addEventListener("click", () => goToProjectSlide(index));
-    projectCarouselDots?.appendChild(dot);
-  });
-
-  projectCarouselPrev?.addEventListener("click", () => goToProjectSlide(activeProjectSlide - 1));
-  projectCarouselNext?.addEventListener("click", () => goToProjectSlide(activeProjectSlide + 1));
-
-  projectCarouselTrack.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
-
-    projectSwipePointerId = event.pointerId;
-    projectSwipeStartX = event.clientX;
-    projectSwipeStartY = event.clientY;
-    projectSwipeDeltaX = 0;
-    isProjectSwipeDragging = true;
-    setProjectCarouselDragging(true);
-    projectCarouselTrack.setPointerCapture(event.pointerId);
-  });
-
-  projectCarouselTrack.addEventListener("pointermove", (event) => {
-    if (!isProjectSwipeDragging || event.pointerId !== projectSwipePointerId) return;
-
-    projectSwipeDeltaX = event.clientX - projectSwipeStartX;
-    const deltaY = event.clientY - projectSwipeStartY;
-
-    if (Math.abs(projectSwipeDeltaX) <= Math.abs(deltaY)) return;
-
-    const viewportWidth = projectCarouselTrack.getBoundingClientRect().width || 1;
-    const dragOffset = (projectSwipeDeltaX / viewportWidth) * 100;
-    projectCarouselTrack.style.transform = `translateX(calc(-${activeProjectSlide * 100}% + ${dragOffset}%))`;
-  });
-
-  projectCarouselTrack.addEventListener("pointerup", (event) => {
-    if (!isProjectSwipeDragging || event.pointerId !== projectSwipePointerId) return;
-
-    const deltaY = event.clientY - projectSwipeStartY;
-    const swipeThreshold = Math.min(90, (projectCarouselTrack.getBoundingClientRect().width || 1) * 0.18);
-    const isHorizontalSwipe = Math.abs(projectSwipeDeltaX) > Math.abs(deltaY) && Math.abs(projectSwipeDeltaX) > swipeThreshold;
-
-    const nextSlide = activeProjectSlide + (projectSwipeDeltaX < 0 ? 1 : -1);
-    resetProjectCarouselSwipe();
-
-    if (isHorizontalSwipe) {
-      goToProjectSlide(nextSlide);
-    } else {
-      updateProjectCarousel();
-    }
-  });
-
-  projectCarouselTrack.addEventListener("pointercancel", cancelProjectCarouselSwipe);
-  projectCarouselTrack.addEventListener("lostpointercapture", resetProjectCarouselSwipe);
-
-  projectCarouselTrack.closest(".project-carousel")?.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      goToProjectSlide(activeProjectSlide - 1);
-    }
-
-    if (event.key === "ArrowRight") {
-      goToProjectSlide(activeProjectSlide + 1);
-    }
-  });
-
-  updateProjectCarousel();
-}
-
 document.querySelectorAll(".project-img").forEach((image) => {
   image.addEventListener("error", () => {
     if (!image.nextElementSibling) return;
@@ -731,17 +591,66 @@ if (contactForm && submitBtn) {
   });
 }
 
-document.querySelectorAll(".project-card").forEach((card) => {
-  if (card.closest(".project-carousel")) return;
+// Desktop/tablet: bento cards reveal their detail panel on hover/focus via
+// pure CSS. Mobile: the same cards become a swipeable "peek" carousel below —
+// this section wires up the active-card highlight, counter, and dots.
+const bentoTrack = document.querySelector(".project-bento");
+const bentoCards = bentoTrack ? Array.from(bentoTrack.querySelectorAll(".bento-card")) : [];
 
-  card.addEventListener("pointermove", (event) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -10;
-    card.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateY(-6px)`;
+if (bentoTrack && bentoCards.length) {
+  const bentoDots = document.getElementById("bentoDots");
+  const bentoCurrent = document.getElementById("bentoCurrent");
+  const bentoTotal = document.getElementById("bentoTotal");
+  const bentoProgress = document.querySelector(".bento-progress");
+  const bentoSwipeHint = document.querySelector(".bento-swipe-hint");
+  const accentCycle = ["var(--electric)", "var(--cyan)", "var(--rose)", "var(--mint)"];
+
+  if (bentoTotal) {
+    bentoTotal.textContent = String(bentoCards.length).padStart(2, "0");
+  }
+
+  bentoCards.forEach((card, index) => {
+    if (!bentoDots) return;
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "bento-dot";
+    dot.setAttribute("aria-label", `Show project ${index + 1}`);
+    dot.addEventListener("click", () => {
+      card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    });
+    bentoDots.appendChild(dot);
   });
 
-  card.addEventListener("pointerleave", () => {
-    card.style.transform = "";
-  });
-});
+  function setActiveBentoCard(index) {
+    bentoCards.forEach((card, i) => card.classList.toggle("is-active", i === index));
+    bentoDots?.querySelectorAll(".bento-dot").forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+
+    if (bentoCurrent) {
+      bentoCurrent.textContent = String(index + 1).padStart(2, "0");
+    }
+
+    if (bentoProgress) {
+      bentoProgress.style.setProperty("--accent-active", accentCycle[index % accentCycle.length]);
+    }
+  }
+
+  const bentoActiveObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          setActiveBentoCard(bentoCards.indexOf(entry.target));
+        }
+      });
+    },
+    { root: bentoTrack, threshold: [0.6] }
+  );
+
+  bentoCards.forEach((card) => bentoActiveObserver.observe(card));
+  setActiveBentoCard(0);
+
+  bentoTrack.addEventListener(
+    "scroll",
+    () => bentoSwipeHint?.classList.add("is-dismissed"),
+    { once: true, passive: true }
+  );
+}
