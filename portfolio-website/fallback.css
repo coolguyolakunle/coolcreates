@@ -731,12 +731,42 @@ form {
   box-shadow: var(--shadow);
 }
 
-#about > div > div:last-child > div:first-child {
+#about > div > div:last-child .about-tech-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.2rem;
+}
+
+#about .about-photo-wrap {
+  position: relative;
+  overflow: hidden;
+  margin: -0.35rem -0.35rem 1.5rem;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 0.5rem;
+  aspect-ratio: 4 / 4.6;
+  background: #18181b;
+}
+
+#about .about-photo-wrap::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 55%, rgba(9, 9, 11, 0.28));
+  pointer-events: none;
+}
+
+#about .about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s ease;
+}
+
+#about .about-photo-wrap:hover .about-photo {
+  transform: scale(1.035);
 }
 
 #about > div > div:last-child p:first-child {
