@@ -654,6 +654,29 @@ main > section:nth-child(2) > div {
   animation: marquee 18s linear infinite;
 }
 
+.tech-marquee > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.tech-marquee-logo,
+.tech-marquee-symbol {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 1.15rem;
+}
+
+.tech-marquee-symbol {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 0.25rem;
+  background: rgba(139, 92, 246, 0.16);
+  color: #a78bfa;
+  font-size: 0.65rem;
+  letter-spacing: 0;
+}
+
 #about > div,
 #contact > div {
   display: grid;
@@ -786,6 +809,7 @@ form {
 .skill-pill {
   display: inline-flex;
   align-items: center;
+  gap: 0.55rem;
   min-height: 2.55rem;
   border: 1px solid var(--line);
   border-radius: 0.45rem;
@@ -795,6 +819,32 @@ form {
   font-size: 0.88rem;
   font-weight: 800;
   transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.skill-logo,
+.skill-symbol {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 1.2rem;
+}
+
+.skill-symbol {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 0.25rem;
+  background: rgba(139, 92, 246, 0.16);
+  color: #c4b5fd;
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.skill-logo-invert {
+  filter: invert(1);
+}
+
+[data-theme="light"] .skill-logo-invert {
+  filter: none;
 }
 
 .skill-pill:hover {
